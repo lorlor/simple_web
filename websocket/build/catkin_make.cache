@@ -1,2 +1,0 @@
-ws_server
--DCATKIN_DEVEL_PREFIX=/home/lor/code/simple_web/websocket/devel -DCMAKE_INSTALL_PREFIX=/home/lor/code/simple_web/websocket/install -G Unix Makefiles
