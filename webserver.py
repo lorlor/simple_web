@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer ### 导入必要的�
 import os
 from os import path, system, environ
 from urllib.parse import urlparse
+import pymysql as pms
 import cgi
 import time
 
@@ -19,6 +20,11 @@ mimedic = {
     '.txt': 'text/plain',
     '.avi': 'video/x-msvideo',
 }
+
+g_db_address = "localhost"
+g_db_user = "lor"
+g_db_pwd = "123456"
+g_db_name = "DemoDB"
 
 curdir = path.dirname(path.realpath(__file__))
 sep = '/'
@@ -47,6 +53,8 @@ class server_handler(BaseHTTPRequestHandler):
                 self.wfile.write(content)
 
     def do_POST(self):
+        self.parent_dir = path.dirname(path.abspath(__file__))
+        mimetype="text/html"
         form = cgi.FieldStorage(
                 fp=self.rfile,
                 headers=self.headers,
@@ -56,11 +64,23 @@ class server_handler(BaseHTTPRequestHandler):
                 }
         )
         print(form['login_user'].value)
-        print(form['login_passwd'.value])
+        print(form['login_passwd'].value)
+
+        db_conn = pms.connect(host=g_db_address, user=g_db_user, password=g_db_pwd, database=g_db_name)
+        db_cursor = db_conn.cursor()
+        select_cmd = "SELECT passwd from Users where name=\"" + form['login_user'].value + "\""
+        db_cursor.execute(select_cmd)
+        row = db_cursor.fetchone()
+        print(row)
+        if form['login_passwd'].value == row[0]:
+            monitor_file = open(os.path.join(self.parent_dir, self.path[1:]) + "monitor.html", "rb")
+        else:
+            pass
+
         self.send_response(200)
         self.send_header('Content-type', mimetype)
         self.end_headers()
-        self.wfile.write("Success")
+        self.wfile.write(monitor_file.read())
 
 def run():
     port = 8080
