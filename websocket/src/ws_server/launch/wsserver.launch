@@ -1,0 +1,13 @@
+<launch>
+    <arg name="ws_port" default="9002"/>
+    <arg name="debug_flag" default="1"/>
+    <arg name="report_status_url" default="http://localhost:8080/taskstatus"/>
+    <arg name="cam_id" default="0"/>
+
+    <node pkg="ws_server" type="wsserver" name="ws_server_1" output="screen">
+        <param name="ws_port" value="$(arg ws_port)"/>
+        <param name="debug_flag" value="$(arg debug_flag)"/>
+        <param name="report_status_url" value="$(arg report_status_url)"/>
+        <param name="cam_id" value="$(arg cam_id)"/>
+    </node>
+</launch>

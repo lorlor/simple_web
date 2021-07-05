@@ -2,10 +2,28 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/monitor.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" charset="utf-8"/>
     <title>Monitor</title>
 </head>
-<body>
-    <h1>Success</h1>
+<body class="text-center">
+    <div class="span6" id="video_area"
+        style="background:#f8f8ff;width:96%;height:98%;float:left;
+            border: solid; border-width: 1px;border-radius:6px;
+            margin-left:2%;margin-right:2px; margin-top:8px;
+            box-shadow:0px 6px 6px -6px #aaa">
+        <div style="width:96%;height:80%;
+                    margin-top:1%;margin-left:2%;
+                    border: solid;border-width:2px;border-radius:6px">
+            <canvas id="video_disp" style="height:100%;width:100%"></canvas>
+        </div>
+        <div class="container text-center" style="width:80%;height:12%;
+                    margin-left:10%;margin-top:1%;">
+            <button class="btn btn-success btn-lg" id="btnvideoconnect" type="button" onclick="btnConnect()"
+                style="font-size:1em; height:75%;width:40%;margin-right:3%; margin-top:2%;background:#2E8B57;">Connect</button>
+            <button class="btn btn-danger btn-lg" id="btnvideodisconnect" type="button" onclick="btnDisconnect()"
+                style="font-size:1em; height:75%;width:40%;margin-left:3%; margin-top:2%;">Disconnect</button>
+        </div>
+    </div>
 </body>
 </html>

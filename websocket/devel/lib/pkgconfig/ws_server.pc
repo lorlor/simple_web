@@ -1,0 +1,8 @@
+prefix=/home/lor/code/simple_web/websocket/devel
+
+Name: ws_server
+Description: Description of ws_server
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/lor/code/simple_web/websocket/devel/lib 
+Requires: 
